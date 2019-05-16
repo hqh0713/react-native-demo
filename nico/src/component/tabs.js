@@ -9,6 +9,7 @@ export default class Tabs extends Component {
     }
   }
   changeTabs(msg) {
+    console.log(msg)
     this.setState({
       activeIndex: msg
     })
@@ -22,7 +23,7 @@ export default class Tabs extends Component {
             <Button vertical onPress={()=>{this.changeTabs('0')}} style={this.state.activeIndex === '0'? styles.active: ''}>
               <Text>Apps</Text>
             </Button>
-            <Button vertical onPress={()=>{this.changeTabs('1')}} style={this.state.activeIndex === '1'? styles.active: ''}>
+            <Button vertical onPress={()=>{this.changeTakbs('1')}} style={this.state.activeIndex === '1'? styles.active: ''}>
               <Text>Camera1</Text>
             </Button>
             <Button vertical onPress={()=>{this.changeTabs('2')}} style={this.state.activeIndex === '2'? styles.active: ''}>
