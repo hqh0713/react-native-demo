@@ -7,24 +7,37 @@
  */
 
 import React, {Component} from 'react';
-import { StyleSheet, Text, View} from 'react-native';
-
-// const instructions = Platform.select({
-//   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-//   android:
-//     'Double tap R on your keyboard to reload,\n' +
-//     'Shake or press menu button for dev menu',
-// });
+import { StyleSheet, Text, View, TextInput} from 'react-native';
+var Dimensions = require('Dimensions')
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
+          {this.getArr()}
+          <TextInput
+              style={styles.input}
+              // keyboardType={'number-pad'}
+              placeholder={'初始化值'}
+              clearButtonMode={'always'}
+          />
       </View>
     );
+  };
+  getArr() {
+    let data = [
+        {name: '苹果'},
+        {name: '西瓜'},
+        {name: '甜瓜'}
+    ]
+      let rt = []
+      for (let i=0; i<data.length;i++) {
+        rt.push(
+            <Text key={i}>{data[i].name}</Text>
+        )
+      }
+      return rt
   }
 }
 
@@ -35,14 +48,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    input: {
+        width: 190,
+        height: 30,
+        borderWidth: 1,
+        borderColor: '#e8e8e8'
+    }
 });
