@@ -7,7 +7,8 @@
  */
 
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
+import Login from './src/views/Login'
 var Dimensions = require('Dimensions')
 
 type Props = {};
@@ -15,13 +16,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-          {this.getArr()}
-          <TextInput
-              style={styles.input}
-              // keyboardType={'number-pad'}
-              placeholder={'初始化值'}
-              clearButtonMode={'always'}
-          />
+        <Login/>
       </View>
     );
   };
