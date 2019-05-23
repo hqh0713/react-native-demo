@@ -8,6 +8,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 var Dimensions = require('Dimensions')
+import BannerList from '../../../src/components/banner/index'
 
 export default class Login extends Component {
     constructor() {
@@ -36,8 +37,8 @@ export default class Login extends Component {
                     style={styles.loginInput}
                     onChangeText={(value) => this.setState({password: value})}
                 />
-                <TouchableOpacity activeOpacity={0.5}>
-                    <View style={styles.loginBtnWrap} onPress={() =>{this.press()}}>
+                <TouchableOpacity activeOpacity={0.9} onPress={() =>{this.press()}}>
+                    <View style={styles.loginBtnWrap}>
                         <Text style={styles.loginBtnText}>登陆</Text>
                     </View>
                 </TouchableOpacity>
@@ -46,6 +47,7 @@ export default class Login extends Component {
                     <Text style={{color: '#63a9f8'}}>申请新账号</Text>
                     <Text>{this.state.account}</Text>
                 </View>
+                <BannerList/>
             </View>
         )
     }
