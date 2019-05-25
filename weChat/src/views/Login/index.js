@@ -45,7 +45,6 @@ export default class Login extends Component {
                 <View style={styles.loginRegister}>
                     <Text style={{color: '#63a9f8'}}>无法登陆</Text>
                     <Text style={{color: '#63a9f8'}}>申请新账号</Text>
-                    <Text>{this.state.account}</Text>
                 </View>
                 <BannerList/>
             </View>
