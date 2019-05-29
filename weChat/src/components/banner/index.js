@@ -18,7 +18,7 @@ export default class BannerList extends Component {
         super();
         this.state = {
             activeIndex: 0,
-            time: 5000,
+            time: 3000,
             timer: ''
         }
     }

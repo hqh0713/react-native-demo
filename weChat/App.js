@@ -8,7 +8,8 @@
 
 import React, {Component} from 'react';
 import { StyleSheet, Text, View} from 'react-native';
-import Login from './src/views/Login'
+// import Login from './src/views/Login'
+import RootNavigator from './src/views/Index'
 var Dimensions = require('Dimensions')
 
 type Props = {};
@@ -16,7 +17,8 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Login/>
+        {/*<RootNavigator/>*/}
+          <Text>dfdf</Text>
       </View>
     );
   };
