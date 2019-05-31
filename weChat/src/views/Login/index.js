@@ -5,7 +5,8 @@ import {
     View,
     TextInput,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Button
 } from 'react-native';
 var Dimensions = require('Dimensions')
 import BannerList from '../../../src/components/banner/index'
@@ -39,7 +40,8 @@ export default class Login extends Component {
                 />
                 <TouchableOpacity activeOpacity={0.9} onPress={() =>{this.press()}}>
                     <View style={styles.loginBtnWrap}>
-                        <Text style={styles.loginBtnText}>登陆</Text>
+                        <Button title='登陆' style={styles.loginBtnText} onPress={()=> this.props.navigation.navigate('IndexScreen')}/>
+                        {/*<Text style={styles.loginBtnText}>登陆</Text>*/}
                     </View>
                 </TouchableOpacity>
                 <View style={styles.loginRegister}>

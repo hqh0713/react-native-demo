@@ -1,36 +1,74 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
-import { StackNavigator } from 'react-navigation'; // 1.0.0-beta.14
+import React, {Component} from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Button
+} from 'react-native';
+// import Icon from 'react-native-vector-icons/Ionicons';
+const Dimensions = require('Dimensions');
 
-const HomeScreen = ({ navigation }) => (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-            onPress={() => navigation.navigate('Details')}
-            title="Go to details"
-        />
-    </View>
-);
+export default class Login extends Component {
+    constructor() {
+        super()
+        this.state = {
+            account: 'dd',
+            password: ''
+        }
+    }
+    render() {
+        return (
+            <View style={styles.loginWrap}>
+                {/*<Icon name='ios-home'/>*/}
+                <Button title='go login' onPress={()=> this.props.navigation.navigate('LoginScreen')}/>
+                <Button
+                    title="Go back"
+                    onPress={() => this.props.navigation.goBack()}
+                />
+            </View>
+        )
+    }
+}
 
-const DetailsScreen = () => (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-    </View>
-);
-
-const RootNavigator = StackNavigator({
-    Home: {
-        screen: HomeScreen,
-        navigationOptions: {
-            headerTitle: 'Home',
-        },
+const styles = StyleSheet.create({
+    loginWrap: {
+        flex: 1
     },
-    Details: {
-        screen: DetailsScreen,
-        navigationOptions: {
-            headerTitle: 'Details',
-        },
+    loginImg: {
+        marginTop: 50,
+        marginBottom: 20,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        borderWidth: 3,
+        borderColor: 'white'
     },
-});
-
-export default RootNavigator;
+    loginInput: {
+        width: Dimensions.get('window').width,
+        height: 35,
+        marginBottom: 1,
+        textAlign: 'center',
+        backgroundColor: 'white'
+    },
+    loginBtnWrap: {
+        marginTop: 20,
+        marginBottom: 10,
+        width: 350,
+        height: 40,
+        backgroundColor: 'blue',
+        opacity: 0.6,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    loginBtnText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    loginRegister: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 350
+    }
+})
