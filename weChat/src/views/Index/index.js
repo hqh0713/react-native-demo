@@ -5,7 +5,7 @@ import {
     View,
     Button
 } from 'react-native';
-// import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Feather';
 const Dimensions = require('Dimensions');
 
 export default class Login extends Component {
@@ -19,7 +19,7 @@ export default class Login extends Component {
     render() {
         return (
             <View style={styles.loginWrap}>
-                {/*<Icon name='ios-home'/>*/}
+                <Icon name='airplay'/>
                 <Button title='go login' onPress={()=> this.props.navigation.navigate('LoginScreen')}/>
                 <Button
                     title="Go back"

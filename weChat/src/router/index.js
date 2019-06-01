@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer,createBottomTabNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import LoginScreen from '../../src/views/Login/index'
 import IndexScreen from '../../src/views/Index/index'
 import MineScreen from '../../src/views/Mine/index'
@@ -16,18 +16,27 @@ const TabNavigator = createBottomTabNavigator(
                     activeTintColor: '#e91e63',
                     labelStyle: {
                         fontSize: 14,
-                    },
-                    tabBarIcon: (
-                        <Icon name='ios-cloud'/>
-                    )
-                }
+                    }
+                },
+                tabBarIcon: (
+                    <Icon name='anchor' size={20}/>
+                )
             }
         },
         MineScreen: {
             screen: MineScreen,
             navigationOptions: {
                 title: '我的',
-                headerTitle: '我的'
+                headerTitle: '我的',
+                tabBarOptions: {
+                    activeTintColor: '#e91e63',
+                    labelStyle: {
+                        fontSize: 14,
+                    }
+                },
+                tabBarIcon: (
+                    <Icon name='dragon' size={20}/>
+                )
 
             }
         }
