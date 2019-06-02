@@ -9,7 +9,6 @@ import {
     Button
 } from 'react-native';
 var Dimensions = require('Dimensions')
-import BannerList from '../../../src/components/banner/index'
 
 export default class Login extends Component {
     constructor() {
@@ -48,7 +47,6 @@ export default class Login extends Component {
                     <Text style={{color: '#63a9f8'}}>无法登陆</Text>
                     <Text style={{color: '#63a9f8'}}>申请新账号</Text>
                 </View>
-                <BannerList/>
             </View>
         )
     }

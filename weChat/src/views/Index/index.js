@@ -1,25 +1,24 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
-    Text,
     View,
     Button
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 const Dimensions = require('Dimensions');
+import Banner from '../../components/banner'
 
 export default class Login extends Component {
     constructor() {
         super()
         this.state = {
-            account: 'dd',
-            password: ''
+            movies: []
         }
     }
     render() {
         return (
             <View style={styles.loginWrap}>
-                <Icon name='airplay'/>
+                <Banner/>
                 <Button title='go login' onPress={()=> this.props.navigation.navigate('LoginScreen')}/>
                 <Button
                     title="Go back"
@@ -27,6 +26,21 @@ export default class Login extends Component {
                 />
             </View>
         )
+    }
+    componentDidMount() {
+        this._getindexList()
+    }
+    _getindexList() {
+        let moviesList = []
+        fetch('https://facebook.github.io/react-native/movies.json')
+            .then((response) => response.json())
+            .then((res) => {
+                this.state.movies = res.movies
+
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 }
 

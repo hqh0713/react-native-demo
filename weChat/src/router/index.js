@@ -51,11 +51,7 @@ const LoginStack = createStackNavigator({
         }
     },
     IndexScreen: {
-        screen: TabNavigator,
-        navigationOptions: {
-            title: '登陆页',
-            headerTitle: '登陆页'
-        }
+        screen: TabNavigator
     }
 }, {
     initialRouteName: 'IndexScreen'
