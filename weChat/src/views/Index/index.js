@@ -2,11 +2,16 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     View,
-    Button
+    Button,
+    FlatList,
+    Text,
+    TouchableOpacity,
+    Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 const Dimensions = require('Dimensions');
 import Banner from '../../components/banner'
+import TabNav from "../../components/btmNavigator";
 
 export default class Login extends Component {
     constructor() {
@@ -17,12 +22,12 @@ export default class Login extends Component {
     }
     render() {
         return (
-            <View style={styles.loginWrap}>
+            <View style={styles.index}>
                 <Banner/>
-                <Button title='go login' onPress={()=> this.props.navigation.navigate('LoginScreen')}/>
-                <Button
-                    title="Go back"
-                    onPress={() => this.props.navigation.goBack()}
+                <FlatList
+                    data={this.state.movies}
+                    renderItem={this.renderItem}
+                    contentContainerStyle={styles.moviesWrap}
                 />
             </View>
         )
@@ -30,13 +35,62 @@ export default class Login extends Component {
     componentDidMount() {
         this._getindexList()
     }
+    renderItem(item) {
+        let imgUrl = ''
+        switch (item.item.id) {
+            case 1:
+                imgUrl = require('./Image/movie_1.jpeg')
+                break
+            case 2:
+                imgUrl = require('./Image/movie_2.jpeg')
+                break
+            case 3:
+                imgUrl = require('./Image/movie_3.jpeg')
+                break
+            case 4:
+                imgUrl = require('./Image/movie_4.jpeg')
+                break
+            case 5:
+                imgUrl = require('./Image/movie_5.jpeg')
+                break
+        }
+        return(
+                <TouchableOpacity
+                    activeOpacity={0.9}
+                >
+                    <View style={styles.movesList} key={item.item.id}>
+                        <Image
+                            source={imgUrl}
+                            style={styles.movieImg}
+                            key={item.item.title}>
+                        </Image>
+                        <View style={styles.movieDescWrap}>
+                            <Text style={styles.movieTitle}>{item.item.title}</Text>
+                            <Text>豆瓣评分：{item.item.mark}</Text>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+        )
+    }
     _getindexList() {
+        let moviesArr = {
+            1: {id: 1, title: '复仇者联盟4', mark: '8.2',},
+            2: {id: 2, title: '皮卡丘侦探', mark: '6.6'},
+            3: {id: 3, title: '阿拉丁', mark: '8.0'},
+            4: {id: 4, title: '恶人传', mark: '8.6'},
+            5: {id: 5, title: '一个母亲的复仇', mark: '6.8'}
+        }
         let moviesList = []
         fetch('https://facebook.github.io/react-native/movies.json')
             .then((response) => response.json())
             .then((res) => {
-                this.state.movies = res.movies
-
+                moviesList = res.movies
+                moviesList.forEach((item, index) => {
+                    moviesList[index] = moviesArr[item.id]
+                })
+                this.setState({
+                    movies: moviesList
+                })
             })
             .catch((error) => {
                 console.error(error)
@@ -45,44 +99,25 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-    loginWrap: {
+    index: {
         flex: 1
     },
-    loginImg: {
-        marginTop: 50,
-        marginBottom: 20,
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        borderWidth: 3,
-        borderColor: 'white'
-    },
-    loginInput: {
-        width: Dimensions.get('window').width,
-        height: 35,
-        marginBottom: 1,
-        textAlign: 'center',
-        backgroundColor: 'white'
-    },
-    loginBtnWrap: {
-        marginTop: 20,
-        marginBottom: 10,
-        width: 350,
-        height: 40,
-        backgroundColor: 'blue',
-        opacity: 0.6,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    loginBtnText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    loginRegister: {
+    movesList: {
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: 350
+        marginBottom: 5
+    },
+    movieImg: {
+       flex: 1,
+       height: 120
+    },
+    movieDescWrap: {
+        flex: 1,
+        marginLeft: 10
+    },
+    movieTitle: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 5
     }
 })
