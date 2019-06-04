@@ -11,13 +11,13 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 const Dimensions = require('Dimensions');
 import Banner from '../../components/banner'
-import TabNav from "../../components/btmNavigator";
 
 export default class Login extends Component {
     constructor() {
         super()
         this.state = {
-            movies: []
+            movies: [],
+            refreshing: false
         }
     }
     render() {
@@ -25,15 +25,50 @@ export default class Login extends Component {
             <View style={styles.index}>
                 <Banner/>
                 <FlatList
+                    contentContainerStyle={styles.moviesWrap}
                     data={this.state.movies}
                     renderItem={this.renderItem}
-                    contentContainerStyle={styles.moviesWrap}
+                    onEndReachedThreshold={0.1}
+                    onEndReached={() => this._onEndReached()}
+                    refreshing={this.state.refreshing}
+                    onRefresh={() => this._onReFresh()}
                 />
             </View>
         )
     }
     componentDidMount() {
         this._getindexList()
+    }
+    // 上拉加载更多数据
+    _onEndReached() {
+        if (this.state.movies.length >= 10) return
+        const moviesArr = {
+            1: {id: 1, title: '复仇者联盟4', mark: '8.2',},
+            2: {id: 2, title: '皮卡丘侦探', mark: '6.6'},
+            3: {id: 3, title: '阿拉丁', mark: '8.0'},
+            4: {id: 4, title: '恶人传', mark: '8.6'},
+            5: {id: 5, title: '一个母亲的复仇', mark: '6.8'}
+        }
+        let index = Math.round(Math.random() / 2 * 10)
+        let movies = this.state.movies
+        let movie = moviesArr[index]
+        movies.push(movie)
+        this.setState({
+            movies: movies
+        })
+    }
+    // 下拉刷新
+    _onReFresh() {
+        const moviesArr = [
+            {id: 1, title: '复仇者联盟4', mark: '8.2',},
+            {id: 2, title: '皮卡丘侦探', mark: '6.6'},
+            {id: 3, title: '阿拉丁', mark: '8.0'},
+            {id: 4, title: '恶人传', mark: '8.6'},
+            {id: 5, title: '一个母亲的复仇', mark: '6.8'}
+        ]
+        this.setState({
+            movies: moviesArr
+        })
     }
     renderItem(item) {
         let imgUrl = ''
@@ -56,8 +91,7 @@ export default class Login extends Component {
         }
         return(
                 <TouchableOpacity
-                    activeOpacity={0.9}
-                >
+                    activeOpacity={0.9}>
                     <View style={styles.movesList} key={item.item.id}>
                         <Image
                             source={imgUrl}
@@ -106,6 +140,9 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         marginBottom: 5
+    },
+    moviesWrap: {
+        marginTop: 10
     },
     movieImg: {
        flex: 1,
